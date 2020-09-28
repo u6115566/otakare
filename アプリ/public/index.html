@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- firebaseのスクリプト -->
+    <link rel="stylesheet" href="manifest.json">
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+ <meta name="theme-color" content="#67CEBC">
+    <link rel="manifest" href="/manifest.json">
+    <script src="/index.js" type="module"></script>
+
+    <link rel="manifest" crossorigin="use-credentials" href="%PUBLIC_URL%/manifest.json" />
+</head>
+
+<body>
+    <div class="page">
+        <img class="logo" src="img/rogo.png" alt="ロゴ">
+        <p class="catch">推しを見逃さないカレンダーアプリ</p>
+        <h1 class="apptitle">おたカレ</h1>
+        <form method="post" action="">
+            <img class="icon" src="img/mail.png" alt="メール">
+
+            <input class="form" type="text" id="email" placeholder="メール" /><br>
+
+            <img class="icon" src="img/key.png" alt="鍵">
+            <input class="form" type="password" id="password" placeholder="パスワード" /><br>
+        </form>
+     <!--   <span class="bottom"><input type="submit" value="新規登録" onclick="signUp()" /></span>-->
+
+            <span class="bottom"><a class="link" href="shinki/index.html">新規登録</a></span>
+
+            <span class="bottom"><input class="submitb" type="submit" value="ログイン" onclick="signIn()" /></span>
+       <!--<span class="bottom"><input type="button" value="ログアウト" onclick="signOut()" /></span>--> 
+        <p id="log"></p>
+        <p id="state"></p>
+
+           <!-- このファイルに認証用の処理を実装します。 -->
+    <script src="firebase-auth.js"></script>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>エススリーデモサイト</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-
+ <!--
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>-->
+ <!-- firebaseのスクリプト -->
+ <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+ <!--<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>-->
+ <!--<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>-->
+ <!---->
+  <script src="js/config.js"></script>
+  
+  <link href='./fullcalendar-3.5.0/fullcalendar.min.css' rel='stylesheet' />
+  <link href='./fullcalendar-3.5.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+  <script src='./fullcalendar-3.5.0/lib/moment.min.js'></script>
+  <script src='./fullcalendar-3.5.0/fullcalendar.min.js'></script>
+  <script src='./fullcalendar-3.5.0/locale/ja.js'></script>
+<!--ファイルの読み込み終了-->
+
+
+  <script>
+//PHPファイルの読み込み    
+  function saveSchedule(inputTitle, inputStart, inputEnd) {
+    //データベースの読み書きを"/schadule"にする
+      var ref1 = firebase.database().ref('/schadule');
+      //pushされたらset
+      ref1.push().set({
+        //どんな名前で保存するかを指定
+        title: inputTitle,
+        start: moment(inputStart).format("YYYY-MM-DD HH:mm").toString(),
+        end: moment(inputEnd).format("YYYY-MM-DD HH:mm").toString(),
+        color: "#98fb98"
+      });
+    }
+    //予定の削除をする
+    function deleteSchedule(id) {
+      //idを取得し
+      var ref1 = firebase.database().ref('/schadule/' + id);
+      //予定を削除
+      ref1.remove();
+    }
+
+    function caldisp(sdataString) {
+      //一定時間後のfunctionを実行する
+      window.setTimeout(function () {
+
+        //fullcalendarについて
+        $('#calendar').fullCalendar({
+          //どう表示させるか
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listWeek'
+          },
+          navLinks: true, // can click day/week names to navigate views
+          selectable: true,
+          selectHelper: true,
+          select: function (start, end) {
+            //タブで入力画面を表示させる
+            var title = prompt('イベント名です:');
+
+            //入力されたデータを保存する
+            saveSchedule(title, start, end);
+            var eventData;
+            if (title && title != "") {
+              eventData = {
+                title: title,
+                start: start,
+                end: end,
+                color: "#98fb98"
+              };
+
+            }
+            //日付をなにもしていない場合
+            $('#calendar').fullCalendar('unselect');
+          },
+          editable: true,
+          eventLimit: true, 
+          //要素のコールバック
+          eventRender: function (event, element) {
+            //データベース１がクリックされたら
+            element.bind('dblclick', function () {
+              //フラグを立てる
+              var flg = false;
+              //イベントを削除
+              $('#calendar').fullCalendar('removeEvents', function (ev) {
+                deleteSchedule(event.key);
+                //ev_idとevent_idが一緒だったら
+                return (ev._id == event._id);
+              });
+
+            });
+          },
+          //eventに sdateStringをいれる
+          events: sdataString
+
+        });
+      }, 1500);
+
+    }
+
+//データを取得する
+    function getData() {
+      var sdata = [];
+      var sdataString;
+      var ref2 = firebase.database().ref('/schadule');
+      //読み込んだ瞬間
+      ref2.on('value', function (snapshot) {
+        //もし、valとnullが完全一致していたら
+        if (snapshot.val() == null) {
+
+        }
+        //https://firebase.google.com/docs/database/web/lists-of-data?hl=ja
+        //スナップショットをリスト化する
+        snapshot.forEach(function (childSnapshot) {
+          var tmp = childSnapshot.val();
+          tmp.key = childSnapshot.key;
+          sdata.push(tmp);
+        });
+      });
+      //sdataを返す
+      return sdata;
+    }
+
+    function reRenderCal() {
+      var sdata = getData();
+      //一定時間後にfunctionを実行する
+      window.setTimeout(function () {
+        //カレンダーの予定を削除する
+        $('#calendar').fullCalendar('removeEvents');
+        $('#calendar').fullCalendar('renderEvents', sdata, true);
+      }, 2000);
+    }
+
+    $(document).ready(function () {
+
+      sdata = getData();
+
+      var ref2 = firebase.database().ref('/schadule');
+      ref2.on('child_added', function (data) {
+        reRenderCal();
+      });
+      ref2.on('child_removed', function (data) {
+        reRenderCal();
+      });
+
+      $('#logout').on('click', function () {
+        firebase.auth().signOut();
+        //javascript 現在ページURLを参照する
+        location.href = "../index.html"
+      });
+
+    // 参照を取得
+      var ref = firebase.database().ref('/messages');
+
+      // データの読み込み
+      ref.on('child_added', function (snapshot) {
+        $('<li class="chat">').text(snapshot.val().title).prependTo('#message-list');
+      });
+
+      // データの書き込み
+      $('#submit').on('click', function () {
+        ref.push().set({
+          author: email,
+          title: $('#message').val(),
+          
+        });
+      });
+      caldisp(sdata);
+    });
+  </script>
+</head>
+<body>
+
+<div class="container">
+
+            <div id="calendar"></div>
+    
+    </div>
+
+  </div>
+</body>
+</html>

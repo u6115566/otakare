@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <!-- firebaseのスクリプト -->
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="page">
+        <h2 class="usertoroku">ユーザー登録</h2>
+        <form method="post" action="">
+
+            <img class="icon" src="../img/mail.png" alt="メール">
+
+            <input class="form" type="text" id="email" placeholder="メール" /><br>
+
+            <img class="icon" src="../img/key.png" alt="鍵">
+            <input class="form" type="password" id="password" placeholder="パスワード" /><br>
+        </form>
+        <span class="bottom"><input class="submitb" type="submit" value="新規登録" onclick="signUp()" /></span>
+        <p id="log"></p>
+        <p id="state"></p>
+
+           <!-- このファイルに認証用の処理を実装します。 -->
+    <script src="../firebase-auth.js"></script>
+
+
+       <!--     <img class="icon" src="../img/mail.png" alt=""><input class="form" type="text" name="name" value="" placeholder="メール"><br>
+            <img class="icon" src="../img/key.png" alt=""><input class="form" type="password" name="pass" value="" placeholder="パスワード"><br>
+        </form>
+        <span class="bottom"><a class="link" href="../seikou/index.html">登録</a></span>
+
+        -->
+    </div>
+</body>
+
+</html>

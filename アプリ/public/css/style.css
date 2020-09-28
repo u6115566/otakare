@@ -1,0 +1,556 @@
+/*ログイン画面*/
+html {
+    padding: 0;
+    margin: 0;
+   
+}
+
+.page {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.catch {
+    color: #565E97;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.apptitle {
+    color: #565E97;
+     font-size: 20px;
+    font-weight: bold;
+    margin: 0px 69px;
+    margin-bottom: 17px;
+}
+h1 {
+    padding:10px;
+
+}
+
+.logo {
+    margin-top: 15%;
+}
+
+input {
+    margin-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.icon {
+    margin-right: 20px;
+    margin-bottom: -14px;
+}
+
+.bottom {
+    background-color: #FBC1B5;
+    border-radius: 60px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.link {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    text-decoration: none;
+    color: #707070;   
+}
+
+.form {
+    height: 40px;
+    width: 200px;
+    border-radius: 9px;
+    color: #A6A6A6;
+}
+
+
+/*規約*/
+
+.appkiyaku {
+    margin: 15% 0% 5% 0%;
+    font-weight: bold;
+    color: #565E97;
+}
+.submitb {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    font-weight: bold;
+    font-size: 19px;
+    color: #707070;
+}
+
+
+/* .kiyakunaiyou {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+} */
+
+.box {
+    width: 86%;
+    height: 390px;
+    padding: 30px;
+    margin-left: 7%;
+    margin-bottom: 30px;
+    background: #ddd;
+}
+
+.scrolly {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+/*ユーザー登録画面*/
+
+.usertoroku {
+    margin-top: 100px;
+    font-weight: bold;
+    color: #565E97;
+    margin-bottom: 40px;
+}
+
+input {
+    margin-bottom: 30px;
+}
+
+
+/*ユーザー登録成功*/
+
+.usertoroku {
+    margin: 15% 0% 5% 0%;
+    font-weight: bold;
+    color: #565E97;
+  
+}
+
+
+/*カレンダー画面*/
+
+
+/*---------------------------------------
+    ヘッダのcss
+    ---------------------------------------*/
+
+#calender {
+    border-bottom: 1px solid;
+}
+
+.calform {
+    text-align: center;
+}
+
+.cal-header {
+    font-size: 1.7em;
+    padding: 0;
+    margin-bottom: 10px;
+    background-color: #FBC1B5;
+    border-bottom: 1px solid #ddd;
+}
+
+#cal-header span {
+    margin: 5px;
+    padding: 40px 20px;
+    display: inline-block;
+}
+
+.selected-month {
+    color: #565E97;
+}
+
+.yajirusi span {
+    justify-content: space-between;
+    padding: 60px;
+}
+
+
+/*---------------------------------------
+カレンダーのcss
+---------------------------------------*/
+
+#cal-main {
+    font-size: 17px;
+    line-height: 50px;
+    table-layout: fixed;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #565E97;
+    border-bottom: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+#cal-main th {
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    color: #565E97;
+}
+
+#cal-main td {
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.cal-today {
+    background-color: #F1A100;
+    font-weight: bold;
+}
+
+.cal-day.active {
+    background-color: #FFC9D7;
+}
+.bottom2 {
+    background-color: #FBC1B5;
+    border-radius: 27px;
+    font-weight: bold;
+    margin-top: -5px;
+    margin-left: -1px;
+    margin-right: 21px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    padding-left: 11px;
+    padding-right: 20px;
+}
+/*予定作成*/
+.title  {
+    color: #707070;
+    font-size: 23px;
+    margin-top: 115px;
+}
+
+.icon2 {
+        /* margin: 35px; */
+        padding: 43px;
+}
+.icon3 {
+    float: left;
+    /* margin: 0px; */
+    margin-right: -54px;
+    margin-left: 30px;
+}
+    /* display: block;
+    justify-content: space-around; */
+
+.yotei {
+    margin-top:-10px;
+}
+/* .shousai2 {
+    /* margin: 30px; */
+*/
+.shousai p{
+   margin: 4px;
+}
+
+
+    /* margin: 20px -71px -46px -323px; */
+
+/* .icon3 p {
+    padding: 20px;
+} */
+/* .icon4 {
+   
+    margin: 0px 32px -59px -207px;
+} */
+
+.btn-circle-flat {
+    margin: 42px 20px -55px 609px;
+    display: inline-block;
+    text-decoration: none;
+    background:#565E97;
+    color: #FFF;
+    width: 41px;
+    height: 39px;
+    line-height: 36px;
+    border-radius: 50%;
+    text-align: center;
+    overflow: hidden;
+    transition: .4s;
+  }
+  
+  .btn-circle-flat:hover {
+    background: #668ad8;
+  }
+  label{
+    box-shadow:0 3px 5px rgba(0,0,0,.2);
+    padding:15px;
+    /* background:white; */
+    width: 243px;
+    display:inline-block;
+    position:relative;
+    margin-left: 60px;
+    /* margin-top: 40px; */
+  }
+  
+  select{
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    font-size:16px;
+    color:#909090;
+    border-radius:0;
+    width:275px;
+    z-index:2;
+    background:transparent;
+  }
+  
+  label:after{
+    content:"\25bc";
+    font-size:16px;
+    color:white;
+    background:#565E97;
+    width:42px;
+    text-align:center;
+    line-height:3.2em;
+    top:0;
+    right:0;
+    bottom:0;
+    position:absolute;
+    pointer-events:none;
+  }
+  
+  option{
+    border-bottom:1px solid #eaeaea;
+    border-left:3px solid white;
+    appearance:none;
+  }
+  
+  option:hover{
+    background-color:white;
+    border-left:3px solid #f3a1a1;
+  
+  }
+  * {
+    box-sizing: border-box;
+    }
+    .modal-content h2 {
+        font-size: 19px;
+        color: #565E97;
+
+    }
+   
+    .modal-wrapper {
+        z-index: 999;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 60px 10px;
+        text-align: center
+      }
+      
+      .modal-wrapper:not(:target) {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s, visibility .3s;
+      }
+      
+      .modal-wrapper:target {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity .4s, visibility .4s;
+      }
+      
+      .modal-wrapper::after {
+        display: inline-block;
+        height: 100%;
+        margin-left: -.05em;
+        vertical-align: middle;
+        content: ""
+      }
+      
+      .modal-wrapper .modal-window {
+        box-sizing: border-box;
+        display: inline-block;
+        z-index: 20;
+        position: relative;
+        /* width: 73%; */
+        width: 84%;
+        max-width: 600px;
+        padding: 15px 30px 15px;
+        border-radius: 2px;
+        background: #fff;
+        box-shadow: 0 0 30px rgba(0, 0, 0, .6);
+        /* vertical-align: middle */
+      }
+      
+      .modal-wrapper .modal-window .modal-content {
+        max-height: 80vh;
+        overflow-y: auto;
+        font-size: 14px;
+       
+      }
+      
+      .modal-overlay {
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .8)
+      }
+      
+      .modal-wrapper .modal-close {
+        z-index: 20;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 35px;
+        color: #95979c !important;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 35px;
+        text-align: center;
+        text-decoration: none;
+        text-indent: 0
+      }
+      
+      .modal-wrapper .modal-close:hover {
+        color: #2b2e38 !important
+      }​
+    
+  
+ 
+  /* select {
+      margin: 20px;
+  } */
+
+
+/*検索画面*/
+
+.musimegane img {
+    padding: 20px;
+}
+
+/* .janru {} */
+
+.janrumojiicon {
+    display: flex;
+    justify-content: space-around;
+}
+
+.janrumojiall {
+    display: flex;
+    justify-content: space-around;
+}
+
+.janrumoji {
+    text-decoration: none;
+    color: #565E97;
+    font-weight: bold;
+    margin-top: -30px 0px;
+  
+}
+.space{
+    padding: 90px;
+}
+
+/*カレンダー一覧画面*/
+
+/* .allcal {} */
+
+.allcal a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.allcal li {
+    text-align: left;
+    background-color: #67CEBC;
+    border-radius: 20px;
+    list-style: none;
+    margin: auto 20px 12px;
+    padding: 12px 14px;
+}
+
+.allcal img {
+    margin-bottom: -7px;
+    margin-right: 10px;
+}
+
+.calmaker {
+    color: white;
+}
+
+
+/*検索画面*/
+
+
+
+
+/*メニューバー*/
+/*メニューバー*/
+.menubar {
+    background-color: #FBC1B5;
+    padding: 12px;
+    width: 102vw;
+    margin: -27% -4%;
+    position: fixed;
+    top: 596px; 
+}
+.menubar2 {
+    background-color: #FBC1B5;
+    padding: 12px;
+    width: 102vw;
+    margin: 10% -4%;
+    position: fixed;
+}
+.menubar3 {
+    background-color: #FBC1B5;
+    padding: 12px;
+    width: 102vw;
+    margin: 20% -4%;
+    position: fixed;
+}
+
+.menuicon {
+    padding: 0;
+    margin-bottom: -12px;
+    
+}
+.menuicon2 {
+    margin: 28px -4%;
+    padding: 8px;
+    margin-bottom: -12px;
+    position: absolute;
+
+}
+
+
+.menumoji {
+    color: #565E97;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0;
+    margin-top: -15px;
+}
+.m1,
+.m2 {
+    display: flex;
+    
+    justify-content: space-around;
+}

@@ -1,0 +1,234 @@
+<!--uid ri-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>カレンダー</title>
+    <!-- <a href="#modal-02">
+        <img class="menuicon2" src="../img/folder.png">
+    </a>
+    <div class="modal-wrapper" id="modal-02">
+        <a href="#!" class="modal-overlay"></a>
+        <div class="modal-window">
+            <div class="modal-content">
+                <div class="allcal">
+                    <li class="cal"><a href="../yotei/index.html">ジャニーズレンダー</a><br><img src="../img/wman.png"><span class="calmaker">雨宮</span></li>
+                    <li class="cal"><a href="../yotei/index.html">韓流カレンダー</a><br><img src="../img/wman.png"><span class="calmaker">村田</span></li>
+                    <li class="cal"><a href="../yotei/index.html">プロレスカレンダー</a><br><img src="../img/wman.png"><span class="calmaker">李</span></li>
+                    <li class="cal"><a href="../yotei/index.html">日電カレンダー</a><br><img src="../img/wman.png"><span class="calmaker">小山内</span></li>
+                    <li class="cal"><a href="../yotei/index.html">アプリカレンダー</a><br><img src="../img/wman.png"><span class="calmaker">関根</span></li>
+                    <li class="cal"><a href="../yotei/index.html">就活カレンダー</a><br><img src="../img/wman.png"><span class="calmaker">森</span></li>
+                </div>
+                <span class="bottom2"><a class="link" href="../calender/index.html">戻る</a></span>
+            </div>
+            <a href="#!" class="modal-close">×</a>
+        </div> -->
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <!-- firebaseのスクリプト -->
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+
+    <script src="../../js/config.js"></script>
+
+    <link href='../../fullcalendar-3.5.0/fullcalendar.min.css' rel='stylesheet' />
+    <link href='../../fullcalendar-3.5.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <script src='../../fullcalendar-3.5.0/lib/moment.min.js'></script>
+    <script src='../../fullcalendar-3.5.0/fullcalendar.min.js'></script>
+    <script src='../../fullcalendar-3.5.0/locale/ja.js'></script>
+    <!--ファイルの読み込み終了-->
+
+
+    <script>
+        //PHPファイルの読み込み    
+        function saveSchedule(inputTitle, inputStart, inputEnd) {
+            //データベースの読み書きを"/schadule"にする
+            var ref1 = firebase.database().ref('/schadule/ri');
+            //pushされたらset
+            ref1.push().set({
+                //どんな名前で保存するかを指定
+                title: inputTitle,
+                uid: "ri",
+                start: moment(inputStart).format("YYYY-MM-DD HH:mm").toString(),
+                end: moment(inputEnd).format("YYYY-MM-DD HH:mm").toString(),
+                color: "#33CCFF"
+            });
+        }
+        //予定の削除をする
+        function deleteSchedule(id) {
+            //idを取得し
+            var ref1 = firebase.database().ref('/schadule/' + id);
+            //予定を削除
+            ref1.remove();
+        }
+
+        function caldisp(sdataString) {
+            //一定時間後のfunctionを実行する
+            window.setTimeout(function() {
+
+                //fullcalendarについて
+                $('#calendar').fullCalendar({
+                    //どう表示させるか
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay,listWeek'
+                    },
+                    navLinks: true, // can click day/week names to navigate views
+                    selectable: true,
+                    selectHelper: true,
+                    select: function(start, end) {
+                        //タブで入力画面を表示させる
+                        var title = prompt('今日の予定:');
+
+                        //入力されたデータを保存する
+                        saveSchedule(title, start, end);
+                        var eventData;
+                        if (title && title != "") {
+                            eventData = {
+                                uid: "ri",
+                                title: title,
+                                start: start,
+                                end: end,
+                                color: "#33CCFF"
+                            };
+
+                        }
+                        //日付をなにもしていない場合
+                        $('#calendar').fullCalendar('unselect');
+                    },
+                    editable: true,
+                    eventLimit: true,
+                    //要素のコールバック
+                    eventRender: function(event, element) {
+                        //データベース１がクリックされたら
+                        element.bind('dblclick', function() {
+                            //フラグを立てる
+                            var flg = false;
+                            //イベントを削除
+                            $('#calendar').fullCalendar('removeEvents', function(ev) {
+                                deleteSchedule(event.key);
+                                //ev_idとevent_idが一緒だったら
+                                return (ev._id == event._id);
+                            });
+
+                        });
+                    },
+                    //eventに sdateStringをいれる
+                    events: sdataString
+
+                });
+            }, 1500);
+
+        }
+
+        //データを取得する
+        function getData() {
+            var sdata = [];
+            var sdataString;
+            var ref2 = firebase.database().ref('/schadule/ri');
+            //読み込んだ瞬間
+            ref2.on('value', function(snapshot) {
+                //もし、valとnullが完全一致していたら
+  
+                console.log(snapshot.val());
+          snapshot.forEach(function(children) {
+      
+      //var ref2 =firebase.database().ref(`/schadule/${uId}`);
+          children.val().userId;
+ 
+    });
+//スナップショットをリスト化する
+                snapshot.forEach(function(childSnapshot) {
+                    var tmp = childSnapshot.val();
+                    tmp.key = childSnapshot.key;
+                    sdata.push(tmp);
+                });
+            });
+            //sdataを返す
+            return sdata;
+        }
+
+        function reRenderCal() {
+            var sdata = getData();
+            //一定時間後にfunctionを実行する
+            window.setTimeout(function() {
+                //カレンダーの予定を削除する
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('renderEvents', sdata, true);
+            }, 2000);
+        }
+
+        $(document).ready(function() {
+
+            sdata = getData();
+
+            var ref2 = firebase.database().ref('/schadule/ri');
+            ref2.on('child_added', function(data) {
+                reRenderCal();
+            });
+            ref2.on('child_removed', function(data) {
+                reRenderCal();
+            });
+
+            $('#logout').on('click', function() {
+                firebase.auth().signOut();
+                //javascript 現在ページURLを参照する
+                location.href = "../../index.html"
+            });
+
+            // 参照を取得
+            var ref = firebase.database().ref('/messages');
+
+            // データの読み込み
+            ref.on('child_added', function(snapshot) {
+                $('<li class="chat">').text(snapshot.val().title).prependTo('#message-list');
+            });
+
+            // データの書き込み
+            $('#submit').on('click', function() {
+                ref.push().set({
+                    author: email,
+                    title: $('#message').val(),
+
+                });
+            });
+            caldisp(sdata);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="page">
+        <!-- <img class="menuicon" src="../img/folder.png"> -->
+
+        <div id='calendar'></div>
+
+        <a href="../ri_ame/index.html">ダウンロードする</a>
+
+        <div class="menubar3">
+            <div class="m1">
+
+                <a href="../../calender/index.html"><img class="menuicon" src="../../img/calender.png"></a>
+                <a href="../../find2/index.html"><img class="menuicon" src="../../img/search.png"></a>
+            </div>
+            <br>
+            <div class="m2">
+
+                <span class="menumoji">マイカレンダー</span>
+                <span class="menumoji">予定を探す</span>
+            </div>
+        </div>
+
+
+    </div>
+
+    </div>
+</body>
+
+</html>

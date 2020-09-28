@@ -1,0 +1,13 @@
+{
+    "name": "Calender App",
+    "short_name": "Calender",
+    "start_url": "public/index.html",
+    "display": "standalone",
+    "theme_color": "#FBC1B5",
+    "background_color": "#FBC1B5",
+    "icons": [{
+        "src": "public/img/rogo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }]
+}
